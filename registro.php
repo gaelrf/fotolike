@@ -1,3 +1,20 @@
+<?php
+    require_once 'conexion.php';
+    if(isset($_POST['usuario'])){
+        $usuario = $_POST['usuario'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO usuarios (usuario, email, password) VALUES ('$usuario', '$email', '$password')";
+        $resultado = $conexion->query($sql);
+        if($resultado){
+            echo "Usuario registrado";
+        }else{
+            echo "Error al registrar";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
