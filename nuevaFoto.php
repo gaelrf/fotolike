@@ -12,7 +12,14 @@ if (isset($_SESSION["id"])) {
         if ($tamanoFoto <= 1000000) {
             $ruta = "fotos/" . $nombreFoto;
             if (move_uploaded_file($tmpFoto, $ruta)) {
-                echo "Foto subida correctamente";
+                require_once("conexiondb.php");
+                $sql = "INSERT INTO fotos (titulo, foto, idusuario) VALUES (:titulo, :foto, :id_usuario)";
+                $stm = $conexion->prepare($sql);
+                $stm->bindParam(':titulo', $titulo);
+                $stm->bindParam(':foto', $ruta);
+                $stm->bindParam(':id_usuario', $_SESSION['id']);
+                $stm->execute();
+                header('Location: index.php');
             }
         } else {
             echo "El tamaño de la foto es demasiado grande";

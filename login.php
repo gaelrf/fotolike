@@ -12,7 +12,7 @@ if (isset($_POST["usuario"])) {
         session_start();
         $_SESSION['usuario'] = $usuario;
         $_SESSION['id'] = $usuario['id'];
-        header('Location: nuevaFoto.php');
+        header('Location: indwx.php');
     } else {
         echo 'Usuario o contraseña incorrectos';
     }
